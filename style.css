@@ -1,0 +1,642 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #050608;
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
+  touch-action: none;
+}
+
+button,
+select {
+  font-family: inherit;
+}
+
+
+/* =========================
+   MENU
+========================= */
+
+#menu {
+  position: fixed;
+  inset: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: 30px;
+
+  background:
+    radial-gradient(
+      circle at 70% 30%,
+      rgba(0,150,255,.18),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at 20% 80%,
+      rgba(255,40,40,.12),
+      transparent 35%
+    ),
+    #06080b;
+
+  z-index: 100;
+}
+
+.logo {
+  font-size: clamp(45px, 9vw, 90px);
+  font-weight: 900;
+  letter-spacing: -5px;
+  line-height: .9;
+  max-width: 800px;
+}
+
+.logo small {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 5px;
+  color: #87919c;
+  margin-bottom: 12px;
+}
+
+.logo span {
+  color: #22aaff;
+}
+
+.subtitle {
+  margin-top: 15px;
+  color: #6e7b87;
+  letter-spacing: 4px;
+  font-size: 11px;
+}
+
+.menu-panel {
+  margin-top: 35px;
+
+  width: min(430px, 100%);
+
+  display: grid;
+  gap: 10px;
+}
+
+.menu-panel label {
+  margin-top: 8px;
+
+  font-size: 10px;
+  letter-spacing: 2px;
+
+  color: #77828e;
+}
+
+select {
+  width: 100%;
+
+  border: 1px solid #27313a;
+  background: #10151a;
+  color: white;
+
+  padding: 15px;
+
+  border-radius: 8px;
+
+  outline: none;
+}
+
+select:focus {
+  border-color: #159eff;
+}
+
+#startButton {
+  margin-top: 15px;
+
+  padding: 17px;
+
+  border: 0;
+  border-radius: 8px;
+
+  background: #159eff;
+  color: white;
+
+  font-weight: 800;
+  letter-spacing: 2px;
+
+  cursor: pointer;
+
+  transition: .2s;
+}
+
+#startButton:hover {
+  background: #48b8ff;
+  transform: translateY(-2px);
+}
+
+.performance {
+  margin-top: 20px;
+
+  display: flex;
+  gap: 15px;
+  align-items: center;
+
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: #697681;
+}
+
+.performance select {
+  width: auto;
+  padding: 7px 12px;
+}
+
+.controls-info {
+  position: absolute;
+  bottom: 25px;
+  left: 30px;
+
+  color: #4d5862;
+  font-size: 10px;
+  line-height: 1.7;
+}
+
+
+/* =========================
+   GAME
+========================= */
+
+#game {
+  position: fixed;
+  inset: 0;
+
+  display: none;
+
+  background: #000;
+}
+
+#game.active {
+  display: block;
+}
+
+#gameCanvas {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  display: block;
+}
+
+
+/* =========================
+   CROSSHAIR
+========================= */
+
+#crosshair {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  width: 30px;
+  height: 30px;
+
+  transform: translate(-50%, -50%);
+
+  pointer-events: none;
+}
+
+#crosshair i {
+  position: absolute;
+
+  background: white;
+
+  opacity: .9;
+}
+
+#crosshair i:nth-child(1) {
+  width: 2px;
+  height: 8px;
+
+  left: 14px;
+  top: 0;
+}
+
+#crosshair i:nth-child(2) {
+  width: 2px;
+  height: 8px;
+
+  left: 14px;
+  bottom: 0;
+}
+
+#crosshair i:nth-child(3) {
+  width: 8px;
+  height: 2px;
+
+  top: 14px;
+  left: 0;
+}
+
+#crosshair i:nth-child(4) {
+  width: 8px;
+  height: 2px;
+
+  top: 14px;
+  right: 0;
+}
+
+
+/* =========================
+   TOP HUD
+========================= */
+
+#topHud {
+  position: absolute;
+
+  top: 20px;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  width: min(500px, 90%);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  pointer-events: none;
+}
+
+.team-score {
+  text-align: center;
+
+  min-width: 60px;
+}
+
+.team-score span {
+  display: block;
+
+  color: #29aaff;
+
+  font-size: 26px;
+  font-weight: 900;
+}
+
+.team-score.red span {
+  color: #ff4545;
+}
+
+.team-score small {
+  font-size: 8px;
+  letter-spacing: 2px;
+  color: #89939d;
+}
+
+.match-info {
+  text-align: center;
+}
+
+.match-info span {
+  display: block;
+
+  color: #87929c;
+
+  font-size: 8px;
+  letter-spacing: 2px;
+}
+
+.match-info strong {
+  display: block;
+
+  font-size: 20px;
+}
+
+
+/* =========================
+   PLAYER HUD
+========================= */
+
+#playerHud {
+  position: absolute;
+
+  left: 25px;
+  right: 25px;
+  bottom: 25px;
+
+  display: flex;
+  justify-content: space-between;
+
+  align-items: end;
+
+  pointer-events: none;
+}
+
+.health {
+  width: 210px;
+}
+
+.health-top {
+  display: flex;
+  justify-content: space-between;
+
+  font-size: 10px;
+  color: #bbc2c8;
+
+  margin-bottom: 7px;
+}
+
+.health-bar {
+  height: 8px;
+
+  background: rgba(255,255,255,.15);
+
+  border-radius: 20px;
+
+  overflow: hidden;
+}
+
+#healthFill {
+  width: 100%;
+  height: 100%;
+
+  background: #32e28a;
+
+  transition: width .15s;
+}
+
+.weapon {
+  text-align: right;
+}
+
+.weapon-name {
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: #89949d;
+}
+
+.ammo strong {
+  font-size: 42px;
+  line-height: 1;
+}
+
+.ammo span {
+  color: #68737d;
+}
+
+.ammo b {
+  color: #aeb7bf;
+}
+
+
+/* =========================
+   KILL FEED
+========================= */
+
+#killFeed {
+  position: absolute;
+
+  right: 20px;
+  top: 100px;
+
+  width: 230px;
+
+  font-size: 11px;
+
+  pointer-events: none;
+}
+
+.kill {
+  padding: 8px;
+
+  margin-bottom: 4px;
+
+  background: rgba(0,0,0,.35);
+
+  border-right: 2px solid #159eff;
+
+  animation: feedIn .2s ease;
+}
+
+@keyframes feedIn {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+
+/* =========================
+   GAME MESSAGE
+========================= */
+
+#gameMessage {
+  position: absolute;
+
+  left: 50%;
+  top: 42%;
+
+  transform: translate(-50%, -50%);
+
+  text-align: center;
+
+  pointer-events: none;
+
+  opacity: 0;
+}
+
+#gameMessage.show {
+  opacity: 1;
+}
+
+#messageTitle {
+  display: block;
+
+  font-size: clamp(35px, 8vw, 75px);
+
+  font-weight: 900;
+
+  text-shadow:
+    0 4px 30px rgba(0,0,0,.8);
+}
+
+#messageSub {
+  display: block;
+
+  color: #aab3ba;
+
+  letter-spacing: 2px;
+
+  margin-top: 8px;
+}
+
+
+/* =========================
+   PAUSE
+========================= */
+
+#pauseButton {
+  position: absolute;
+
+  top: 20px;
+  right: 20px;
+
+  width: 42px;
+  height: 42px;
+
+  border: 1px solid rgba(255,255,255,.2);
+
+  border-radius: 8px;
+
+  background: rgba(0,0,0,.3);
+
+  color: white;
+
+  cursor: pointer;
+}
+
+
+/* =========================
+   MOBILE CONTROLS
+========================= */
+
+#mobileControls {
+  display: none;
+
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+}
+
+#joystick {
+  position: absolute;
+
+  bottom: 45px;
+  left: 30px;
+
+  width: 125px;
+  height: 125px;
+
+  border-radius: 50%;
+
+  background: rgba(255,255,255,.08);
+
+  border: 1px solid rgba(255,255,255,.12);
+
+  pointer-events: auto;
+}
+
+#joystickKnob {
+  position: absolute;
+
+  width: 55px;
+  height: 55px;
+
+  left: 35px;
+  top: 35px;
+
+  border-radius: 50%;
+
+  background: rgba(255,255,255,.25);
+
+  border: 1px solid rgba(255,255,255,.3);
+}
+
+.mobile-actions {
+  position: absolute;
+
+  right: 20px;
+  bottom: 30px;
+
+  display: grid;
+
+  grid-template-columns: repeat(2, 65px);
+
+  gap: 12px;
+
+  pointer-events: auto;
+}
+
+.mobile-actions button {
+  width: 65px;
+  height: 65px;
+
+  border-radius: 50%;
+
+  border: 1px solid rgba(255,255,255,.2);
+
+  background: rgba(0,0,0,.4);
+
+  color: white;
+
+  font-size: 23px;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (pointer: coarse) {
+
+  #mobileControls {
+    display: block;
+  }
+
+  #crosshair {
+    width: 24px;
+    height: 24px;
+  }
+
+  #playerHud {
+    bottom: 190px;
+  }
+
+  .health {
+    width: 150px;
+  }
+
+  .ammo strong {
+    font-size: 30px;
+  }
+
+}
+
+@media (max-width: 600px) {
+
+  #menu {
+    padding: 20px;
+  }
+
+  .logo {
+    font-size: 48px;
+  }
+
+  .controls-info {
+    display: none;
+  }
+
+  #topHud {
+    top: 10px;
+  }
+
+  #killFeed {
+    top: 75px;
+    width: 170px;
+  }
+
+}
