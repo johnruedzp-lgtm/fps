@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <title>STRIKEZONE FPS</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js">
+  </script>
+</head>
+
+<body>
+
+  <!-- MENU -->
+  <div id="menu">
+
+    <div class="menu-glow"></div>
+
+    <div class="logo">
+      <small>PROJECT</small>
+      STRIKE<span>ZONE</span>
+    </div>
+
+    <p class="subtitle">
+      MOBILE TACTICAL FPS
+    </p>
+
+    <div class="menu-panel">
+
+      <label>GAME MODE</label>
+
+      <select id="modeSelect">
+        <option value="tdm">TEAM DEATHMATCH</option>
+        <option value="ffa">FREE FOR ALL</option>
+        <option value="dom">DOMINATION</option>
+      </select>
+
+      <label>MAP</label>
+
+      <select id="mapSelect">
+        <option value="arena">URBAN ARENA</option>
+        <option value="desert">DESERT OUTPOST</option>
+        <option value="forest">FOREST CAMP</option>
+      </select>
+
+      <label>WEAPON</label>
+
+      <select id="weaponSelect">
+        <option value="rifle">VX-7 ASSAULT RIFLE</option>
+        <option value="smg">RUSH-9 SMG</option>
+        <option value="shotgun">M12 SHOTGUN</option>
+        <option value="sniper">FALCON SNIPER</option>
+        <option value="pistol">PX PISTOL</option>
+        <option value="lmg">TITAN LMG</option>
+      </select>
+
+      <label>CHARACTER</label>
+
+      <select id="characterSelect">
+        <option value="alpha">ALPHA</option>
+        <option value="shadow">SHADOW</option>
+        <option value="desert">DESERT</option>
+        <option value="forest">FOREST</option>
+      </select>
+
+      <button id="startButton">
+        START MATCH
+      </button>
+
+    </div>
+
+    <div class="performance">
+      <span>⚡ PERFORMANCE MODE</span>
+
+      <select id="qualitySelect">
+        <option value="low">LOW</option>
+        <option value="medium" selected>MEDIUM</option>
+        <option value="high">HIGH</option>
+        <option value="ultra">ULTRA</option>
+      </select>
+    </div>
+
+    <p class="controls-info">
+      PC: WASD • Mouse • Click • R • Shift • Space
+      <br>
+      Mobile: Touch controls
+    </p>
+
+  </div>
+
+
+  <!-- GAME -->
+  <div id="game">
+
+    <canvas id="gameCanvas"></canvas>
+
+    <!-- CROSSHAIR -->
+    <div id="crosshair">
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+    </div>
+
+    <!-- TOP HUD -->
+    <div id="topHud">
+
+      <div class="team-score">
+        <span id="blueScore">0</span>
+        <small>BLUE</small>
+      </div>
+
+      <div class="match-info">
+        <span id="modeName">TDM</span>
+        <strong id="timer">05:00</strong>
+      </div>
+
+      <div class="team-score red">
+        <span id="redScore">0</span>
+        <small>RED</small>
+      </div>
+
+    </div>
+
+
+    <!-- PLAYER HUD -->
+    <div id="playerHud">
+
+      <div class="health">
+
+        <div class="health-top">
+          <span>HEALTH</span>
+          <strong id="healthText">100</strong>
+        </div>
+
+        <div class="health-bar">
+          <div id="healthFill"></div>
+        </div>
+
+      </div>
+
+
+      <div class="weapon">
+
+        <div class="weapon-name" id="weaponName">
+          VX-7
+        </div>
+
+        <div class="ammo">
+
+          <strong id="ammoText">30</strong>
+
+          <span>
+            /
+            <b id="reserveText">120</b>
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- KILL FEED -->
+    <div id="killFeed"></div>
+
+
+    <!-- MESSAGE -->
+    <div id="gameMessage">
+      <strong id="messageTitle"></strong>
+      <span id="messageSub"></span>
+    </div>
+
+
+    <!-- MOBILE -->
+    <div id="mobileControls">
+
+      <div id="joystick">
+        <div id="joystickKnob"></div>
+      </div>
+
+      <div class="mobile-actions">
+
+        <button id="fireButton">🔥</button>
+        <button id="aimButton">◎</button>
+        <button id="reloadButton">↻</button>
+        <button id="jumpButton">↑</button>
+
+      </div>
+
+    </div>
+
+
+    <!-- PAUSE -->
+    <button id="pauseButton">
+      II
+    </button>
+
+  </div>
+
+
+  <script src="script.js"></script>
+
+</body>
+</html>
